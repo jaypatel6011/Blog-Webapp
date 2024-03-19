@@ -1,0 +1,6 @@
+/* write your css here */
+body{
+    font-family: sans-serif;
+    background-color: hwb(276 89% 9%);
+    max-width: 100vw;
+}
