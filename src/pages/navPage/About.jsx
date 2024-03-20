@@ -15,7 +15,7 @@ const About = () => {
 
         
     < div className = 'max-w-full overflow-hidden' >
-      <div className='w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:pl-[10%] md:pr-[10%] mt-[60px] justify-center '>
+      <div className='w-[90%] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 md:pl-[10%] md:pr-[10%] mt-[60px] justify-center '>
         {/* video */}
         <img
           className='w-full mx-auto rounded-lg border p-3 shadow-sm shadow-black '

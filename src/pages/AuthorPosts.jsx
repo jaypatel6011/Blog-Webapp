@@ -17,7 +17,7 @@ const AuthorPosts = () => {
       {
 
         allData.map((dataName) => (
-          <div key={dataName.id} className='bg-pink-300 w-[95%] md:w-[30%] mb-8 mx-auto'>
+          <div key={dataName.id} className='bg-pink-300 w-[95%] md:w-[50%] lg:w-[30%] mb-8 mx-auto'>
 
             {
             dataName.author == authorName && 

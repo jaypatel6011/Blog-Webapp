@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom'
 const Footer = () => {
   return (
     <div className='w-full mt-16 bg-gray-900'>
-      <div className='w-full px-[10%] mx-auto flex flex-col items-center flex-wrap lg:flex-row gap-5 justify-between  text-white p-[6rem]'>
+      <div className='w-full mx-auto grid text-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 text-white p-[6rem]'>
         
         <NavLink
-        className='bg-gray-700   text-white px-3 py-1 rounded-lg hover:text-black hover:bg-white transition-all duration-300'
+        className='bg-gray-700  text-white px-3 py-1 rounded-lg hover:text-black hover:bg-white transition-all duration-300'
         to={'/blogs/Health'}>Health</NavLink>
 
         <NavLink 

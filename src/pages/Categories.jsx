@@ -20,7 +20,7 @@ const Categories = () => {
       {
 
         allData.map((dataCategory) => (
-          <div key={dataCategory.id} className=' w-[95%] md:w-[30%] mb-8 mx-auto'>
+          <div key={dataCategory.id} className=' w-[95%] md:w-[50%] lg:w-[30%] mb-8 mx-auto'>
 
             {dataCategory.category === category &&
 

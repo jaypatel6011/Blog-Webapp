@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import PostItem from '../components/PostItem'
 import allData from '../allData'
 import Title from './navPage/Title'
@@ -15,7 +14,7 @@ const Home = () => {
 
         {
           allData.length > 0 ?
-        <div  className=' mt-16  w-[100%]  mx-auto  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-y-16 
+        <div  className=' mt-16  w-[100%] md:w-[95%]  mx-auto  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-y-16 
         lg:px-[10%]'>
           { 
             allData.map((data) =>
