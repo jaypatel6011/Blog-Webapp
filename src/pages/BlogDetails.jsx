@@ -20,7 +20,7 @@ const BlogDetails = () => {
             {dataId.id == id &&
 
 
-              <div className=' w-[95%] md:w-[1080px] mx-auto flex flex-col items-center justify-center gap-10 bg-white p-8 rounded-lg'>
+              <div className=' w-[95%] lg:w-[85%] mx-auto flex flex-col items-center justify-center gap-10 bg-white p-8 rounded-lg'>
                 <div className='w-full flex items-center justify-between'>
                   <PostAuthor data={dataId} />
 

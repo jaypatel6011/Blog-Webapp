@@ -13,7 +13,7 @@ const Blogs = () => {
         </div>
         {
           allData.length > 0 ?
-        <div  className='  w-[100%]  mx-auto  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-y-16 
+        <div  className='  w-[100%] md:w-[95%]  mx-auto  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-y-16 
         lg:px-[10%]'>
           {
             allData.map((data) =>
