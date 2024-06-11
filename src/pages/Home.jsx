@@ -9,7 +9,11 @@ import { AppContext } from '../context/AppContext';
 const Home = () => {
  const {blogs, fetchAllBlog} = useContext(AppContext)
 
+
+
  useEffect(() => {
+
+
   fetchAllBlog()
  },[])
 

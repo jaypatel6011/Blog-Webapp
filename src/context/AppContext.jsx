@@ -2,11 +2,12 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
 
+const url = process.env.REACT_APP_URL
+
 
 export const AppContext = createContext()
 
 export default function AppContextProvider({ children }) {
-  const url = process.env.REACT_APP_URL
   const [token, setToken] = useState("");
   const [role, setRole] = useState("")
 
@@ -15,7 +16,8 @@ export default function AppContextProvider({ children }) {
   // const [blog, setBlog] = useState({});
 
   useEffect(() => {
-// console.log( process.env.REACT_APP_URL)
+    // console.log(url);
+    // console.log(process.env.REACT_APP_URL)
     if (token) {
       localStorage.setItem("role", role)
       localStorage.setItem("token", token)
@@ -46,13 +48,14 @@ export default function AppContextProvider({ children }) {
     });
     // console.log(api.data.data);
     setBlogs(api.data.data);
+    console.log(api.data.data)
     // return api.data.data
   }
 
 
 
   const fetchBlogById = async (id) => {
-    const api = await axios.get(`${url}getBlog/${id}`, {
+    const api = await axios.get(`${url}/getBlog/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -66,7 +69,7 @@ export default function AppContextProvider({ children }) {
 
 
   const sendRequest = async (title, author, authorPic, image, category, content) => {
-    const api = await axios.post(`${url}createBlog`, {
+    const api = await axios.post(`${url}/createBlog`, {
       title, author, authorPic, image, category, content
     },
       {
@@ -81,7 +84,7 @@ export default function AppContextProvider({ children }) {
   }
 
   const sendUpdateRequest = async ({ title, author, authorPic, image, category, content, id }) => {
-    await axios.put(`${url}updateBlog/${id}`, {
+    await axios.put(`${url}/updateBlog/${id}`, {
       title, author, authorPic, image, category, content
     },
       {
@@ -96,7 +99,7 @@ export default function AppContextProvider({ children }) {
   }
 
   const sendDeleteRequest = async (id) => {
-    await axios.delete(`${url}deleteBlog/${id}`,
+    await axios.delete(`${url}/deleteBlog/${id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +113,7 @@ export default function AppContextProvider({ children }) {
   }
 
   const register = async (name, email, password, password2) => {
-    const api = await axios.post(`${url}register`, {
+    const api = await axios.post(`${url}/register`, {
       name, email, password, password2
     },
       {
@@ -126,7 +129,7 @@ export default function AppContextProvider({ children }) {
     return api;
   };
   const login = async (email, password) => {
-    const api = await axios.post(`${url}login`, {
+    const api = await axios.post(`${url}/login`, {
       email, password
     },
       {
