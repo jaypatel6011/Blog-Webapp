@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useLocation } from 'react-router-dom'
-import allData from '../allData'
 import PostAuthor from '../components/PostAuthor'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Title from './navPage/Title'
+import { AppContext } from '../context/AppContext'
 
 
 const Categories = () => {
+  const {blogs} = useContext(AppContext)
   const location = useLocation()
   const category = location.pathname.split('/').at(-1).replaceAll('-', ' ');
 
@@ -19,8 +20,8 @@ const Categories = () => {
 
       {
 
-        allData.map((dataCategory) => (
-          <div key={dataCategory.id} className=' w-[95%] md:w-[50%] lg:w-[30%] mb-8 mx-auto'>
+        blogs.map((dataCategory) => (
+          <div key={dataCategory._id} className=' w-[95%] md:w-[50%] lg:w-[30%] mb-8 mx-auto'>
 
             {dataCategory.category === category &&
 
@@ -36,20 +37,20 @@ const Categories = () => {
 
                   <div className=' mt-6 mx-auto'>
 
-                    <NavLink to={`/blog/${dataCategory.id}`}>
+                    <Link to={`/blog/${dataCategory._id}`}>
                       <h3 className='text-[20px] font-bold mx-0 my-4 hover:text-blue-500'>{dataCategory.title}</h3>
-                    </NavLink>
+                    </Link>
 
                     <p className='text-[16px]'>{dataCategory.content}</p>
 
                     <div className='w-full flex justify-between items-center'>
                       <PostAuthor data={dataCategory} />
 
-                      <NavLink
+                      <Link
                         className=' bg-primary text-white px-3 py-1 mt-[13px] rounded-lg flex  hover:bg-gray-600 transition-all duration-300'
                         to={`/blogs/${dataCategory.category}`}>{dataCategory.category}
 
-                      </NavLink>
+                      </Link>
                     </div>
                   </div>
                 </div>

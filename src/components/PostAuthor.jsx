@@ -1,12 +1,12 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 
 const PostAuthor = ({data}) => {
   return (
     <div>
-      <NavLink to={`/blogs/author`}>
+      <Link to={`/blogs/author`}>
         <div className=' flex flex-row justify-start gap-4 items-center mt-4 '>
           <div>
             <img
@@ -19,7 +19,7 @@ const PostAuthor = ({data}) => {
           </div>
         </div>
 
-      </NavLink>
+      </Link>
     </div>
   )
 }

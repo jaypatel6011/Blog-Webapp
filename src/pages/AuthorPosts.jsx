@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import allData from '../allData'
+import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PostAuthor from '../components/PostAuthor';
 import Title from './navPage/Title';
+import { AppContext } from '../context/AppContext';
 
 const AuthorPosts = () => {
+
+  const {blogs} = useContext(AppContext);
 
   const location = useLocation()
   const authorName = location.pathname.split('/').at(-1).replaceAll('%20', ' ');
@@ -16,8 +18,8 @@ const AuthorPosts = () => {
        <Title title={`${authorName}`}/>
       {
 
-        allData.map((dataName) => (
-          <div key={dataName.id} className='bg-pink-300 w-[95%] md:w-[50%] lg:w-[30%] mb-8 mx-auto'>
+        blogs.map((dataName, index) => (
+          <div key={index} className='bg-pink-300 w-[95%] md:w-[50%] lg:w-[30%] mb-8 mx-auto'>
 
             {
             dataName.author == authorName && 
@@ -35,20 +37,20 @@ const AuthorPosts = () => {
 
                   <div className=' mt-6 mx-auto'>
 
-                    <NavLink to={`/blog/${dataName.id}`}>
+                    <Link to={`/blog/${dataName.id}`}>
                       <h3 className='text-[20px] font-bold mx-0 my-4 hover:text-blue-500'>{dataName.title}</h3>
-                    </NavLink>
+                    </Link>
 
                     <p className='text-[16px]'>{dataName.content}</p>
 
                     <div className='w-full flex justify-between items-center'>
                       <PostAuthor data={dataName} />
 
-                      <NavLink
+                      <Link
                         className=' bg-primary text-white px-3 py-1 mt-[13px] rounded-lg flex  hover:bg-gray-600 transition-all duration-300'
                         to={`/blogs/${dataName.category}`}>{dataName.category}
 
-                      </NavLink>
+                      </Link>
                     </div>
                   </div>
                 </div>

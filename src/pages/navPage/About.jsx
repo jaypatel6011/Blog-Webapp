@@ -4,7 +4,7 @@ import photos from '../image/about.png'
 import author1 from '../image/user-01.png'
 import author2 from '../image/user-02.png'
 import author3 from '../image/user-03.png'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const About = () => {
   return (
@@ -39,25 +39,25 @@ const About = () => {
   
 <div className='mt-12 w-full md:w-[60%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8  '>
   <div className=' flex flex-col items-center justify-center gap-5'>
- <NavLink to={'/blog/user/Natasha%20Lomas'} className=' flex flex-col items-center justify-center gap-5'>
+ <Link to={'/blog/user/Natasha%20Lomas'} className=' flex flex-col items-center justify-center gap-5'>
  <img className='w-[200px] aspect-square rounded-full my-auto ' src={author1} alt="" />
   <p className=' font-semibold'>Natasha Lomas</p>
- </NavLink>
+ </Link>
   </div> 
   
  
   <div className=' flex flex-col items-center justify-center gap-5'>
-  <NavLink to={'/blog/user/Ron%20Miller'}className=' flex flex-col items-center justify-center gap-5'>
+  <Link to={'/blog/user/Ron%20Miller'}className=' flex flex-col items-center justify-center gap-5'>
   <img className='w-[200px] aspect-square rounded-full my-auto ' src={author2} alt="" />
   <p className=' font-semibold'>Ron Miller</p>
-    </NavLink>
+    </Link>
   </div>
 
   <div className=' flex flex-col items-center justify-center gap-5'>
-  <NavLink to={'/blog/user/Carly%20Page'} className=' flex flex-col items-center justify-center gap-5'>
+  <Link to={'/blog/user/Carly%20Page'} className=' flex flex-col items-center justify-center gap-5'>
   <img className='w-[200px] aspect-square rounded-full my-auto ' src={author3} alt="" />
   <p className=' font-semibold'>Carly Page</p>
-  </NavLink>
+  </Link>
   </div>
 
 </div>

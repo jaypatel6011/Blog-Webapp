@@ -19,6 +19,9 @@ import Blogs from "./pages/navPage/Blogs";
 import Contact from "./pages/navPage/Contact";
 import Categories from "./pages/Categories";
 import BlogDetails from "./pages/BlogDetails";
+import AddBlog from "./Admin/AddBlog"
+import UpdateBlog from "./Admin/UpdateBlog";
+import GetUsers from "./Admin/GetUsers";
 
 
 
@@ -59,11 +62,18 @@ function App() {
         <Route path="/login" element={<Login />}/> 
         <Route path="/register" element={<Register />}/>
 
-
+ 
 
 
 
         <Route path="*" element={<ErrorPage />}/> 
+
+        <Route path="/admin">
+          <Route path="addBlog" element={<AddBlog />} />
+          <Route path="updateBlog/:id" element={<UpdateBlog />} />
+          <Route path="users" element={<GetUsers />} />
+
+        </Route>
 
 
         {/* </Route>  */}

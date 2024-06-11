@@ -1,7 +1,19 @@
-import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { AppContext } from '../context/AppContext'
+import { Toaster, toast } from 'react-hot-toast'
+import axios from 'axios'
+// import { login } from '../../../Blog App Server/controllers/user'
 
 const Login = () => {
+
+  const navigate = useNavigate();
+  const { login } = useContext(AppContext)
+
+  useEffect(() => {
+    console.log("jayy", process.env.REACT_APP_URL);
+
+  }, [])
 
   const [userData, setUserData] = useState({
 
@@ -9,8 +21,6 @@ const Login = () => {
     password: ''
 
   })
-
-  console.log(userData)
 
   function logInerChangeHandler(event) {
     setUserData((prev) => {
@@ -23,11 +33,40 @@ const Login = () => {
 
     )
   }
+
+  async function submitHandler(event) {
+    event.preventDefault()
+    const result = await login(userData.email, userData.password)
+    console.log(result.data)
+    // alert(result.data.message)
+    // toast(result.data.message)
+    // API()
+    // toast.success(result.response.data.message)
+
+    if (result.data.success == true) {
+      console.log(result.data.message)
+      toast.success(result.data.message)
+
+      setTimeout(() => {
+        navigate("/")
+      }, 1500);
+
+    }
+
+    if (result.data.success == false) {
+      toast.error(result.data.message)
+      console.log(result.data.message)
+
+
+    }
+
+  }
   return (
     <div className='w-full text-center mt-20'>
+      <Toaster />
       <div className='w-[80%] md:w-[50%] mx-auto flex flex-col justify-between gap-12'>
         <h2 className='text-2xl font-bold '>Sign In</h2>
-        <form className='w-full flex flex-col justify-between gap-8'>
+        <form onSubmit={submitHandler} className='w-full flex flex-col justify-between gap-8'>
 
           {/* <p className=' bg-red py-2 text-white rounded-lg px-2'>This is an error Message</p> */}
 

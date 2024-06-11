@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FaEdit, FaCheck } from 'react-icons/fa'
 
 const avatarUrl = "https://cdn.thecodehelp.in/Jaipur.jpeg";
@@ -30,10 +30,10 @@ const UserProfile = () => {
   return (
     <div className='w-full'>
       <div className='w-full flex flex-col items-center justify-between gap-y-10'>
-        <NavLink
+        <Link
           className=' bg-primary font-bold text-white  px-3 py-1 rounded-lg hover:text-black hover:bg-white transition-all duration-300'
 
-          to={'/myposts/sdfsdf'} >My Posts</NavLink>
+          to={'/myposts/sdfsdf'} >My Posts</Link>
 
         <div className='w-full flex flex-col items-center justify-between'>
           <div className='w-full flex flex-col items-center justify-between space-y-5'>

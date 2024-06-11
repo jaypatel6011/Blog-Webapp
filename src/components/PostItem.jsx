@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import PostAuthor from './PostAuthor'
 
 const PostItem = ({data}) => {
@@ -23,9 +23,9 @@ const PostItem = ({data}) => {
 
       <div className=' mt-6 mx-auto'>
 
-        <NavLink to={`/blog/${data.id}`}>
+        <Link to={`/blog/${data._id}`}>
           <h3 className='text-[20px] font-bold mx-0 my-4 hover:text-blue-500'>{shortTitle}</h3>
-        </NavLink>
+        </Link>
 
 
         <p className='text-[16px]'>{shortDescription}</p>
@@ -33,11 +33,11 @@ const PostItem = ({data}) => {
         <div className='w-full flex justify-between items-center'>
           <PostAuthor data={data} />
 
-          <NavLink 
+          <Link 
         className= ' bg-primary text-white px-3 py-1 mt-[13px] rounded-lg flex  hover:bg-gray-600 transition-all duration-300'
           to={`/blogs/${data.category}`}>{data.category}
         
-          </NavLink>
+          </Link>
         </div>
       </div>
     </div>

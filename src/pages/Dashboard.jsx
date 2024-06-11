@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import data from '../allData'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => {
 
@@ -29,17 +29,17 @@ const Dashboard = () => {
                       <h5 className='font-semibold'>{post.title}</h5>
                     </div>
                     <div className='flex gap-6'>
-                      <NavLink
+                      <Link
                         className='bg-white font-semibold text-black px-2 py-1 rounded-lg'
-                        to={`/posts/${post.id}`} >View</NavLink>
+                        to={`/posts/${post.id}`} >View</Link>
 
-                      <NavLink
+                      <Link
                         className='bg-primary font-semibold text-white px-2 py-1 rounded-lg'
-                        to={`/posts/${post.id}/edit`} >edit</NavLink>
+                        to={`/posts/${post.id}/edit`} >edit</Link>
 
-                      <NavLink to={`/posts/${post.id}/detete`}
+                      <Link to={`/posts/${post.id}/detete`}
                         className=' bg-red font-semibold text-white px-2 py-1 rounded-lg'
-                      >Delete</NavLink>
+                      >Delete</Link>
                     </div>
                   </div>
                 )
