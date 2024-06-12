@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import allData from '../allData';
 import { Link } from 'react-router-dom';
 import PostAuthor from '../components/PostAuthor';
-import axios from 'axios';
 import { AppContext } from '../context/AppContext';
 
 const BlogDetails = () => {
@@ -34,15 +32,19 @@ const BlogDetails = () => {
                   <PostAuthor data={blog} />
 
                 {role == "Admin" &&
-                  <div className='flex flex-row gap-2 md:gap-10'>
+                  <div className='flex flex-row gap-2 md:gap-8'>
 
                   <Link
                     className='bg-primary font-semibold text-white px-2 py-1 rounded-lg'
-                    to={`/admin/updateBlog/${blog._id}`}>Edit</Link>
+                    to={`/admin/blog/edit/${blog._id}`}>
+                      <i className="ri-pencil-line"></i>
+                    </Link>
 
                   <button
                     className=' bg-red font-semibold text-white px-2 py-1 rounded-lg'
-                      onClick={() => sendDeleteRequest(blog._id).then(() => navigate("/"))}>Delete</button>
+                      onClick={() => sendDeleteRequest(blog._id).then(() => navigate("/"))}>
+                         <i className="ri-delete-bin-6-line"></i>
+                      </button>
 
                 </div>}
                 </div>

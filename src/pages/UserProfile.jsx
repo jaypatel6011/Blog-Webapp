@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaEdit, FaCheck } from 'react-icons/fa'
+import Title from './navPage/Title';
 
 const avatarUrl = "https://cdn.thecodehelp.in/Jaipur.jpeg";
 
@@ -29,11 +30,12 @@ const UserProfile = () => {
   }
   return (
     <div className='w-full'>
+      <Title title={"Profile"}/>
       <div className='w-full flex flex-col items-center justify-between gap-y-10'>
         <Link
           className=' bg-primary font-bold text-white  px-3 py-1 rounded-lg hover:text-black hover:bg-white transition-all duration-300'
 
-          to={'/myposts/sdfsdf'} >My Posts</Link>
+          to={'/admin/myposts'} >My Posts</Link>
 
         <div className='w-full flex flex-col items-center justify-between'>
           <div className='w-full flex flex-col items-center justify-between space-y-5'>

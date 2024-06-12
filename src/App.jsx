@@ -1,13 +1,11 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
+import 'remixicon/fonts/remixicon.css'
 import Home from './pages/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Register from './pages/Register';
-import CreatePost from "./pages/CreatePost";
-import EditPost from "./pages/EditPost";
 import AuthorPosts from "./pages/AuthorPosts";
-import Logout from "./pages/Logout";
 import Login from "./pages/Login";
 import UserProfile from "./pages/UserProfile";
 import Authors from "./pages/Authors";
@@ -53,8 +51,6 @@ function App() {
         <Route path="/about" element={<About />}/> 
         <Route path="/blogs" element={<Blogs />}/> 
         <Route path="/contact" element={<Contact />}/> 
-        <Route path="/myposts/sdfsdf" element={<Dashboard />}/> 
-        <Route path="/myposts/sdfsdf" element={<Dashboard />}/> 
         <Route path="/blogs/:category" element={<Categories />}/> 
         <Route path="blog/:id" element={<BlogDetails />}/>
         <Route path="/blogs/author" element={<Authors />}/> 
@@ -63,6 +59,8 @@ function App() {
         <Route path="/register" element={<Register />}/>
 
  
+        <Route path="/profile/:id" element={<UserProfile />}
+        /> 
 
 
 
@@ -70,8 +68,9 @@ function App() {
 
         <Route path="/admin">
           <Route path="addBlog" element={<AddBlog />} />
-          <Route path="updateBlog/:id" element={<UpdateBlog />} />
+          <Route path="blog/edit/:id" element={<UpdateBlog />} />
           <Route path="users" element={<GetUsers />} />
+        <Route path="myposts" element={<Dashboard />}/> 
 
         </Route>
 

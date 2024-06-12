@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import {REACT_APP_URL} from '../allData'
+import { REACT_APP_URL } from '../Data/allData'
 
 const url = REACT_APP_URL
 
