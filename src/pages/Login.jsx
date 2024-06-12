@@ -2,18 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import { Toaster, toast } from 'react-hot-toast'
-import axios from 'axios'
-// import { login } from '../../../Blog App Server/controllers/user'
 
 const Login = () => {
 
   const navigate = useNavigate();
   const { login } = useContext(AppContext)
 
-  useEffect(() => {
-    console.log("jayy", process.env.REACT_APP_URL);
-
-  }, [])
 
   const [userData, setUserData] = useState({
 
@@ -49,7 +43,7 @@ const Login = () => {
 
       setTimeout(() => {
         navigate("/")
-      }, 1500);
+      }, 1000);
 
     }
 

@@ -13,6 +13,12 @@ const Header = () => {
     setManuToggle(!manuToggle)
     setManubar(!manubar)
   }
+  function logOutHandler(){
+    logOut()
+    setManuToggle(true)
+    setManubar(false)
+
+  }
   return (
     <div className='fixed w-full px-[10%] top-0 right-0 left-0 py-4 mx-auto  flex flex-row items-center justify-between bg-black '>
       <div>
@@ -110,26 +116,26 @@ const Header = () => {
 
       {manubar &&
 
-        <div className='fixed h-[100%]  w-[30%] bg-black flex flex-col items-center justify-center  gap-7 top-0 bottom-0 right-0 md:hidden '>
+        <div className='fixed h-[100%]  w-[50%] bg-black flex flex-col items-center justify-center  gap-7 top-0 bottom-0 right-0 md:hidden '>
           <NavLink
             className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/'} >Home</NavLink>
+            to={'/'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Home</NavLink>
 
           <NavLink
             className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/services'} >Services</NavLink>
+            to={'/services'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Services</NavLink>
 
           <NavLink
             className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/about'} >About</NavLink>
+            to={'/about'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >About</NavLink>
 
           <NavLink
             className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/blogs'} >Blogs</NavLink>
+            to={'/blogs'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Blogs</NavLink>
 
           <NavLink
             className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/contact'} >Contact</NavLink>
+            to={'/contact'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Contact</NavLink>
 
 
           <div className='flex flex-col items-center  gap-5 md:hidden'>
@@ -137,12 +143,16 @@ const Header = () => {
             <a className='text-white hover:text-orange-500 text-xl' href="https://www.NavLinkedin.com/authwall?trk=bf&trkInfo=AQHSVvpOYMozuQAAAY5W-3GYe2-m82920hhUR0J4rdd7t4IH2D5EJFAolqLbheI6m2yEwzaC9nPF1ZvrGZEi9x627Mz5MVc_UjBO8k6xVHreXe4ETLxt9uvTW3-S9qYHqEBanwo=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.NavLinkedin.com%2Fin%2Fjay-patel-350a87258"><FaNavLinkedin /></a> */}
             {/* <NavLink className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</NavLink> */}
             {!isAuthenticated &&
-          <Link className='bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-lg text-white' to={'/register'}>Register</Link>
+          <Link  
+          onClick={() =>{ setManubar(false); setManuToggle(true) }} 
+          className='bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-lg text-white' to={'/register'}>Register</Link>
 
         }
 
         {!isAuthenticated &&
-          <Link className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</Link>
+          <Link
+          onClick={() =>{ setManubar(false); setManuToggle(true) }}
+          className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</Link>
 
           
         }
@@ -150,14 +160,20 @@ const Header = () => {
         {role == "Admin" &&
 
 
-          <Link className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/admin/addBlog'}>Add Blog</Link>
+          <Link 
+          onClick={() =>{ setManubar(false); setManuToggle(true) }}
+          className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/admin/addBlog'}>Add Blog</Link>
 
          
         }
         {isAuthenticated &&
 
 
-          <button className='bg-orange-500 px-4 py-2 rounded-lg text-white' onClick={logOut}>Logout</button>
+          <button 
+          onClick={
+            logOutHandler
+          }
+          className='bg-orange-500 px-4 py-2 rounded-lg text-white'>Logout</button>
 
           // <NavLink
           // className='text-xl text-primary font-semibold '

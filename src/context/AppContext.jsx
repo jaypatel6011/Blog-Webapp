@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import {REACT_APP_URL} from '../allData'
 
-
-const url = process.env.REACT_APP_URL
+const url = REACT_APP_URL
 
 
 export const AppContext = createContext()

@@ -40,8 +40,8 @@ const Register = () => {
       toast(result.data.message)
 
       setTimeout(() => {
-        navigate("/")
-      }, 1500);
+        navigate("/login")
+      }, 1000);
 
     }
     else{

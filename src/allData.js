@@ -1,5 +1,7 @@
 // import robot from './Image/robot.jpg'
 import author from './Image/author1.jpg'
+ export const REACT_APP_URL = "https://blog-mern-app-9dr3.onrender.com/api/v1"
+
 
 // export const baseUrl = "https://codehelp-apis.vercel.app/api/get-blogs";
 
