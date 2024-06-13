@@ -1,22 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { FaBars, FaCross, FaCrow, FaGithub, FaNavLinkedin } from 'react-icons/fa'
 import { AppContext } from '../context/AppContext'
+import { navData } from '../Data/useNavData'
+import { adminNavData } from '../Data/adminNavData'
 
 
 const Header = () => {
-  const { isAuthenticated, logOut, role } = useContext(AppContext)
+  const { isAuthenticated, logOut, role, userId } = useContext(AppContext)
   const [manubar, setManubar] = useState(false)
   const [manuToggle, setManuToggle] = useState(true)
+  const navigate = useNavigate()
 
   function manubarHandler() {
     setManuToggle(!manuToggle)
     setManubar(!manubar)
   }
-  function logOutHandler(){
+  function logOutHandler() {
     logOut()
     setManuToggle(true)
     setManubar(false)
+    navigate("/")
 
   }
   return (
@@ -25,55 +29,50 @@ const Header = () => {
         <Link to={'/'} className='text-white text-xl font-bold' >Blog<span className='text-orange-500'>App</span></Link>
       </div>
 
-      <div className='hidden flex-row gap-7 md:flex '>
-        <NavLink
-          className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-          to={'/'} >Home</NavLink>
+      {role == "Admin" ?
+        (
+          <div className='hidden flex-row gap-7 md:flex '>
 
-        <NavLink
-          className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-          to={'/services'} >Services</NavLink>
+            {
+              adminNavData.map((data, index) => (
+                <NavLink key={index}
+                  className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
+                  to={data.link} >{data.label}</NavLink>
+              ))
+            }
 
-        <NavLink
-          className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-          to={'/about'} >About</NavLink>
+          </div>
+        ) : (
+          <div className='hidden flex-row gap-7 md:flex '>
 
-        <NavLink
-          className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-          to={'/blogs'} >Blogs</NavLink>
+            {
+              navData.map((data, index) => (
+                <NavLink key={index}
+                  className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
+                  to={data.link} >{data.label}</NavLink>
+              ))
+            }
 
-        <NavLink
-          className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-          to={'/contact'} >Contact</NavLink>
+          </div>
+        )
 
-
-        {/* {token &&
-          <NavLink
-            className='text-xl text-primary font-semibold '
-            to={'/blogs'} >Blogs</NavLink>
-        } */}
-
-
-      </div>
+      }
 
       <div className='lg:flex items-center  gap-5 hidden'>
-        {/* <a className='text-white hover:text-orange-500 text-xl' href="https://github.com/jaypatel6011#"><FaGithub /></a>
-        <a className='text-white hover:text-orange-500 text-xl' href="https://www.NavLinkedin.com/authwall?trk=bf&trkInfo=AQHSVvpOYMozuQAAAY5W-3GYe2-m82920hhUR0J4rdd7t4IH2D5EJFAolqLbheI6m2yEwzaC9nPF1ZvrGZEi9x627Mz5MVc_UjBO8k6xVHreXe4ETLxt9uvTW3-S9qYHqEBanwo=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.NavLinkedin.com%2Fin%2Fjay-patel-350a87258"><FaNavLinkedin /></a> */}
 
         {!isAuthenticated &&
-          <Link className='bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-lg text-white' to={'/register'}>Register</Link>
+          <div className='flex sm:flex-row flex-col gap-7 text-center'>
+            <Link
+              onClick={() => { setManubar(false); setManuToggle(true) }}
+              className='bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-lg text-white' to={'/register'}>Register</Link>
 
-          // <NavLink
-          // className='text-xl text-primary font-semibold '
-          // to={'/logout'} >Logout</NavLink>
-        }
 
-        {!isAuthenticated &&
-          <Link className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</Link>
+            <Link
+              onClick={() => { setManubar(false); setManuToggle(true) }}
+              className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</Link>
 
-          // <NavLink
-          // className='text-xl text-primary font-semibold '
-          // to={'/logout'} >Logout</NavLink>
+          </div>
+
         }
 
         {role == "Admin" &&
@@ -88,20 +87,18 @@ const Header = () => {
         {isAuthenticated &&
 
 
-          <button className='bg-orange-500 px-4 py-2 rounded-lg text-white' onClick={logOut}>Logout</button>
+          <button className='bg-orange-500 px-4 py-2 rounded-lg text-white' onClick={logOutHandler}>Logout</button>
 
-          // <NavLink
           // className='text-xl text-primary font-semibold '
           // to={'/logout'} >Logout</NavLink>
         }
+        {isAuthenticated &&
+              <Link to={`/profile/${userId}`}
+              onClick={() => { setManubar(false); setManuToggle(true) }} >
+              <i className="ri-user-3-fill rounded-full text-white text-2xl p-1 border-2 border-orange-500 "></i>
+              </Link>
+            }
 
-        {/* {role &&
-          <NavLink className='bg-pink-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</NavLink>
-
-          // <NavLink
-          // className='text-xl text-primary font-semibold '
-          // to={'/logout'} >Logout</NavLink>
-        } */}
       </div>
 
       {
@@ -117,68 +114,77 @@ const Header = () => {
       {manubar &&
 
         <div className='fixed h-[100%]  w-[50%] bg-black flex flex-col items-center justify-center  gap-7 top-0 bottom-0 right-0 md:hidden '>
-          <NavLink
-            className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Home</NavLink>
 
-          <NavLink
-            className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/services'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Services</NavLink>
-
-          <NavLink
-            className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/about'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >About</NavLink>
-
-          <NavLink
-            className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/blogs'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Blogs</NavLink>
-
-          <NavLink
-            className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
-            to={'/contact'} onClick={() =>{ setManubar(false); setManuToggle(true) }} >Contact</NavLink>
-
+          {
+            role == "Admin" ? 
+            (
+            <div className='flex flex-col gap-5 '>
+              {
+                adminNavData.map((data, index) => (
+                  <NavLink key={index}
+                    className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
+                    to={data.link} onClick={() => { setManubar(false); setManuToggle(true) }} >{data.label}</NavLink>
+                ))
+              }
+            </div>) : 
+            (<div className='flex flex-col gap-5'>
+              {
+                navData.map((data, index) => (
+                  <NavLink
+                    key={index}
+                    className='text-xl text-white hover:text-orange-500 hover:border-b-2 border-orange-500'
+                    to={data.link} onClick={() => { setManubar(false); setManuToggle(true) }} >{data.label}</NavLink>
+                ))
+              }
+            </div>)
+          }
 
           <div className='flex flex-col items-center  gap-5 md:hidden'>
-            {/* <a className='text-white hover:text-orange-500 text-xl' href="https://github.com/jaypatel6011#"><FaGithub /></a>
-            <a className='text-white hover:text-orange-500 text-xl' href="https://www.NavLinkedin.com/authwall?trk=bf&trkInfo=AQHSVvpOYMozuQAAAY5W-3GYe2-m82920hhUR0J4rdd7t4IH2D5EJFAolqLbheI6m2yEwzaC9nPF1ZvrGZEi9x627Mz5MVc_UjBO8k6xVHreXe4ETLxt9uvTW3-S9qYHqEBanwo=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.NavLinkedin.com%2Fin%2Fjay-patel-350a87258"><FaNavLinkedin /></a> */}
-            {/* <NavLink className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</NavLink> */}
             {!isAuthenticated &&
-          <Link  
-          onClick={() =>{ setManubar(false); setManuToggle(true) }} 
-          className='bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-lg text-white' to={'/register'}>Register</Link>
-
-        }
-
-        {!isAuthenticated &&
-          <Link
-          onClick={() =>{ setManubar(false); setManuToggle(true) }}
-          className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</Link>
-
-          
-        }
-
-        {role == "Admin" &&
+              <div className='flex sm:flex-row flex-col gap-7 text-center'>
+                <Link
+                  onClick={() => { setManubar(false); setManuToggle(true) }}
+                  className='bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded-lg text-white' to={'/register'}>Register</Link>
 
 
-          <Link 
-          onClick={() =>{ setManubar(false); setManuToggle(true) }}
-          className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/admin/addBlog'}>Add Blog</Link>
+                <Link
+                  onClick={() => { setManubar(false); setManuToggle(true) }}
+                  className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/login'}>Login</Link>
 
-         
-        }
-        {isAuthenticated &&
+              </div>
+
+            }
+
+            {role == "Admin" &&
 
 
-          <button 
-          onClick={
-            logOutHandler
-          }
-          className='bg-orange-500 px-4 py-2 rounded-lg text-white'>Logout</button>
+              <div className='flex flex-col items-center  gap-5 md:hidden'>
+                <Link
+                  onClick={() => { setManubar(false); setManuToggle(true) }}
+                  className='bg-rose-500 px-4 py-2 rounded-full text-white' to={'/admin/addBlog'}>Add Blog</Link>
+                <Link
+                  onClick={() => { setManubar(false); setManuToggle(true) }}
+                  className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/admin/addBlog'}>Add Blog</Link>
+              </div>
 
-          // <NavLink
-          // className='text-xl text-primary font-semibold '
-          // to={'/logout'} >Logout</NavLink>
-        }
+
+            }
+            {isAuthenticated &&
+              <Link to={`/profile/${userId}`}
+              onClick={() => { setManubar(false); setManuToggle(true) }} >
+              <i className="ri-user-3-fill rounded-full text-white text-2xl p-1 border-2 border-orange-500 "></i>
+              </Link>
+            }
+            {isAuthenticated &&
+
+
+<button
+  onClick={
+    logOutHandler
+  }
+  className='bg-orange-500 px-4 py-2 rounded-lg text-white'>Logout</button>
+
+}
           </div>
 
         </div>

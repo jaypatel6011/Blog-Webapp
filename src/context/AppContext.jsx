@@ -9,7 +9,9 @@ export const AppContext = createContext()
 
 export default function AppContextProvider({ children }) {
   const [token, setToken] = useState("");
+  const [loading, setLoading] = useState(false)
   const [role, setRole] = useState("")
+  const [userId, setUserId] = useState("")
 
   const [blogs, setBlogs] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -21,16 +23,20 @@ export default function AppContextProvider({ children }) {
     if (token) {
       localStorage.setItem("role", role)
       localStorage.setItem("token", token)
+      localStorage.setItem("id", userId)
       // console.log("jayppp2", role)
       // console.log("role is ", localStorage.getItem("role", role))
     }
     const localStorageToken = localStorage.getItem("token", token)
     const localStorageRole = localStorage.getItem("role", role)
+    const localStorageId = localStorage.getItem("id", userId)
     // console.log('jjjjj', localStorageRole);
 
-    if (localStorageToken && localStorageRole) {
+    if (localStorageToken && localStorageRole && localStorageId) {
       setRole(localStorageRole)
       console.log("localStorageRole", localStorageRole)
+      console.log("localStorageId", localStorageId)
+      setUserId(localStorageId)
       setToken(localStorageToken);
       setIsAuthenticated(true);
 
@@ -40,6 +46,7 @@ export default function AppContextProvider({ children }) {
 
 
   const fetchAllBlog = async () => {
+    setLoading(true)
     const api = await axios.get(`${url}/`, {
       headers: {
         "Content-Type": "application/json",
@@ -49,6 +56,8 @@ export default function AppContextProvider({ children }) {
     // console.log(api.data.data);
     setBlogs(api.data.data);
     console.log(api.data.data)
+    setLoading(false)
+
     // return api.data.data
   }
 
@@ -143,7 +152,12 @@ export default function AppContextProvider({ children }) {
     )
     setToken(api.data.token)
     setRole(api.data.role)
-    console.log(api.data.role)
+
+    if (api.data.success == true) {
+      setUserId(api.data.data._id)
+      console.log(api.data.data._id)
+
+    }
     // setIsAuthenticated(true)
 
 
@@ -154,9 +168,11 @@ export default function AppContextProvider({ children }) {
   const logOut = () => {
     localStorage.removeItem("token", token)
     localStorage.removeItem("role", role)
+    localStorage.removeItem("id", userId)
     setToken("")
     setIsAuthenticated(false)
     setRole("")
+    setUserId("")
 
   }
 
@@ -164,13 +180,45 @@ export default function AppContextProvider({ children }) {
     const api = await axios.get(`${url}/users`, {
       headers: {
         "Content-Type": "application/json",
-        "token": token
+        "token": token,
+        "role": role
       },
       withCredentials: true,
     });
     return api
   }
   // token:localStorage.getItem("token")? JSON.parse(localStorage.getItem("token")): null
+
+  const fetchUserById = async (id) => {
+    const api = await axios.get(`${url}/user/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "token": token,
+        },
+        withCredentials: true,
+        });
+
+        console.log(api);
+        return api
+        }
+        
+        const updateUserById = async ({ name, email, password, newPassword, id }) => {
+    console.log("id is", id)
+    const api = await axios.put(`${url}/updateBlog/${id}`, {
+      name, email, password, newPassword
+    },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "token": token
+
+        },
+        withCredentials: true,
+      });
+      console.log(api);
+      return api;
+
+  }
 
   const value = {
     blogs,
@@ -181,12 +229,15 @@ export default function AppContextProvider({ children }) {
     setIsAuthenticated,
     role,
     setRole,
+    userId,
     fetchAllBlog,
     fetchBlogById,
     sendRequest,
     sendUpdateRequest,
     sendDeleteRequest,
     fetchAllUsers,
+    fetchUserById,
+    updateUserById,
     register,
     logOut,
     login,

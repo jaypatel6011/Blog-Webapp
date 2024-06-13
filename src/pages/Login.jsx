@@ -31,6 +31,7 @@ const Login = () => {
   async function submitHandler(event) {
     event.preventDefault()
     const result = await login(userData.email, userData.password)
+    console.log("login", result.data.role)
     console.log(result.data)
     // alert(result.data.message)
     // toast(result.data.message)
@@ -41,9 +42,12 @@ const Login = () => {
       console.log(result.data.message)
       toast.success(result.data.message)
 
-      setTimeout(() => {
-        navigate("/")
-      }, 1000);
+      
+      if(result.data.role == "Admin"){
+          navigate("/admin/myposts")
+      } else{
+          navigate("/")
+      }
 
     }
 

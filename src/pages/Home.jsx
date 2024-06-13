@@ -12,8 +12,6 @@ const Home = () => {
 
 
  useEffect(() => {
-
-
   fetchAllBlog()
  },[])
 

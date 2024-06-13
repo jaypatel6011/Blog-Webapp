@@ -1,23 +1,33 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FaEdit, FaCheck } from 'react-icons/fa'
 import Title from './navPage/Title';
+import { AppContext } from '../context/AppContext';
 
-const avatarUrl = "https://cdn.thecodehelp.in/Jaipur.jpeg";
+// const avatarUrl = "https://cdn.thec zodehelp.in/Jaipur.jpeg";
+
 
 const UserProfile = () => {
+  const location = useLocation()
+  const id = location.pathname.split('/').at(-1).replaceAll('-', ' ');
+  console.log(id);
+  const navigate = useNavigate()
 
 
-  const [avatar, setAvatar] = useState('')
+  const { fetchUserById, updateUserById } = useContext(AppContext)
 
-  const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: ''
-  })
 
-  console.log(userData)
+  const [userData, setUserData] = useState('')
+
+  useEffect(() => {
+    async function fetched() {
+      const result = await fetchUserById(id)
+      setUserData(result.data.data)
+      console.log(result)
+
+    }
+    fetched()
+  }, [])
 
   function formChangeHandler(event) {
     setUserData((prev) => {
@@ -28,9 +38,23 @@ const UserProfile = () => {
     }
     )
   }
+
+  async function submitHandler(event){
+    event.preventDefault()
+    const result = await updateUserById({
+      name:userData.name, 
+      email:userData.email, 
+      password:userData.password, 
+      newPassword:userData.newPassword, 
+      id
+      })
+      
+    // .then(() => navigate("/"))
+  }
   return (
     <div className='w-full'>
-      <Title title={"Profile"}/>
+      
+      <Title title={"Profile"} />
       <div className='w-full flex flex-col items-center justify-between gap-y-10'>
         <Link
           className=' bg-primary font-bold text-white  px-3 py-1 rounded-lg hover:text-black hover:bg-white transition-all duration-300'
@@ -39,27 +63,20 @@ const UserProfile = () => {
 
         <div className='w-full flex flex-col items-center justify-between'>
           <div className='w-full flex flex-col items-center justify-between space-y-5'>
-            <div className='relative  rounded-full w-[200px] h-[200px] bg-cover'>
-              <img
-                className=' [15rem] aspect-square rounded-full border-8 border-white overflow-hidden'
-                src={avatarUrl} alt="" />
-              <button className='p-3 text-white bottom-[1.4rem] right-[1rem] absolute rounded-full bg-primary'><FaCheck /></button>
-
-            </div>
-            <form className='w-[50%] mx-auto' >
+            {/* <form className='w-[50%] mx-auto' >
               <input
                 className=' hidden'
                 type="file" name='avatar' id='avatar' onChange={(e) => setAvatar(e.target.files[0])} accept='png, jpg, jpeg' />
               <label
                 className='hidden'
                 htmlFor="avatar"><FaEdit /></label>
-            </form>
+            </form> */}
           </div>
-          <h1 className='text-2xl font-bold mt-10 mb-5'>Jay Patel</h1>
+          <h1 className='text-2xl font-bold mt-10 mb-5'>{userData.name}</h1>
 
-          <form className='w-full flex flex-col justify-between gap-8'>
+          <form onClick={submitHandler} className='w-full flex flex-col justify-between gap-8'>
 
-            <p className=' w-[80%] md:w-[50%]  mx-auto  bg-red py-2 text-white rounded-lg px-2'>This is an error Message</p>
+            {/* <p className=' w-[80%] md:w-[50%]  mx-auto  bg-red py-2 text-white rounded-lg px-2'>This is an error Message</p> */}
             <input
               className=' w-[80%] md:w-[50%]  mx-auto py-2 rounded-lg px-2'
               type="text"
@@ -89,7 +106,7 @@ const UserProfile = () => {
               type="password"
               placeholder='Enter New Password'
               name='password2'
-              value={userData.password2}
+              value={userData.newPassword}
               onChange={formChangeHandler} />
 
             <button type='submit'

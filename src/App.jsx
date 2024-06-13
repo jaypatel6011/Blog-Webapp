@@ -71,6 +71,7 @@ function App() {
           <Route path="blog/edit/:id" element={<UpdateBlog />} />
           <Route path="users" element={<GetUsers />} />
         <Route path="myposts" element={<Dashboard />}/> 
+           {/* <Route path="/" element={<Dashboard />}/>  */}
 
         </Route>
 

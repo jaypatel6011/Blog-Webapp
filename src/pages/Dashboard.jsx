@@ -9,7 +9,7 @@ const Dashboard = () => {
   const navigate = useNavigate()
   useEffect(() => {
     fetchAllBlog()
-  }, [])
+   },[])
   // let shortTitle = blogs.title.length > 30 ? blogs.title.substr(0,30)+'...' : blogs.title;
 
 
