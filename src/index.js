@@ -12,7 +12,7 @@ root.render(
 
   <BrowserRouter>
     <AppContextProvider>
-    <App />
+      <App />
     </AppContextProvider>
   </BrowserRouter>
 );

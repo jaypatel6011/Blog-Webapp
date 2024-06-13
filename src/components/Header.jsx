@@ -75,22 +75,12 @@ const Header = () => {
 
         }
 
-        {role == "Admin" &&
-
-
-          <Link className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/admin/addBlog'}>Add Blog</Link>
-
-          // <NavLink
-          // className='text-xl text-primary font-semibold '
-          // to={'/logout'} >Logout</NavLink>
-        }
+        
         {isAuthenticated &&
 
 
-          <button className='bg-orange-500 px-4 py-2 rounded-lg text-white' onClick={logOutHandler}>Logout</button>
+          <button className='bg-orange-500 px-4 py-2 rounded-full text-white' onClick={logOutHandler}>Logout</button>
 
-          // className='text-xl text-primary font-semibold '
-          // to={'/logout'} >Logout</NavLink>
         }
         {isAuthenticated &&
               <Link to={`/profile/${userId}`}
@@ -155,20 +145,10 @@ const Header = () => {
 
             }
 
-            {role == "Admin" &&
+           
 
 
-              <div className='flex flex-col items-center  gap-5 md:hidden'>
-                <Link
-                  onClick={() => { setManubar(false); setManuToggle(true) }}
-                  className='bg-rose-500 px-4 py-2 rounded-full text-white' to={'/admin/addBlog'}>Add Blog</Link>
-                <Link
-                  onClick={() => { setManubar(false); setManuToggle(true) }}
-                  className='bg-orange-500 px-4 py-2 rounded-lg text-white' to={'/admin/addBlog'}>Add Blog</Link>
-              </div>
-
-
-            }
+            
             {isAuthenticated &&
               <Link to={`/profile/${userId}`}
               onClick={() => { setManubar(false); setManuToggle(true) }} >

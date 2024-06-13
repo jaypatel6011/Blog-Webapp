@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import toast, { Toaster } from 'react-hot-toast'
+import Loading from '../components/Loading'
 
 const Register = () => {
   const navigate = useNavigate()
   const { register } = useContext(AppContext)
+  const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useState({
     name: '',
     email: '',
@@ -26,6 +28,7 @@ const Register = () => {
     )
   }
   async function submitHandler(event) {
+    setLoading(true)
     event.preventDefault()
     console.log(userData);
     const result = await register( userData.name, userData.email, userData.password, userData.password2 )
@@ -39,6 +42,7 @@ const Register = () => {
 
       toast(result.data.message)
 
+
       setTimeout(() => {
         navigate("/login")
       }, 1000);
@@ -47,13 +51,14 @@ const Register = () => {
     else{
       toast.error(result.data.message)
     }
-  
+  setLoading(false)
     
   }
   return (
     <div className='w-full text-center mt-20'>
       <Toaster/>
-      <div className='w-[80%] md:w-[50%] mx-auto flex flex-col justify-between gap-12'>
+      {loading ? (<Loading />):(
+        <div className='w-[80%] md:w-[50%] mx-auto flex flex-col justify-between gap-12'>
         <h2 className='text-2xl font-bold '>Sign Up</h2>
         <form onSubmit={submitHandler} className='w-full flex flex-col justify-between gap-8'>
 
@@ -101,6 +106,9 @@ const Register = () => {
         </form>
         <small className='text-start font-semibold'>Already have an account? <Link className='text-primary font-semibold' to={'/login'}>Sign in</Link></small>
       </div>
+      )
+
+      }
     </div>
   )
 }

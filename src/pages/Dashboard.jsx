@@ -3,12 +3,16 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext'
 import Title from './navPage/Title'
+import Loading from '../components/Loading'
 const Dashboard = () => {
+  const [loading, setLoading] = useState(false)
 
   const { blogs, fetchAllBlog, sendDeleteRequest } = useContext(AppContext)
   const navigate = useNavigate()
   useEffect(() => {
+    setLoading(true)
     fetchAllBlog()
+    setLoading(false)
    },[])
   // let shortTitle = blogs.title.length > 30 ? blogs.title.substr(0,30)+'...' : blogs.title;
 
@@ -18,6 +22,9 @@ const Dashboard = () => {
     <div className='w-full '>
       <Title title={"My Blogs"} />
       {
+        loading ? (<Loading />): (
+          <div>
+          {
         blogs.length > 0 ? (
           <div className='w-full'>
             {
@@ -64,6 +71,9 @@ const Dashboard = () => {
             }
           </div>
         ) : <div>No blogs</div>
+        }
+      </div>
+        )
       }
     </div>
   )

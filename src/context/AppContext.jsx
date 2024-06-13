@@ -11,6 +11,7 @@ export default function AppContextProvider({ children }) {
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false)
   const [role, setRole] = useState("")
+  const [user, setUser] = useState([])
   const [userId, setUserId] = useState("")
 
   const [blogs, setBlogs] = useState([]);
@@ -180,8 +181,6 @@ export default function AppContextProvider({ children }) {
     const api = await axios.get(`${url}/users`, {
       headers: {
         "Content-Type": "application/json",
-        "token": token,
-        "role": role
       },
       withCredentials: true,
     });
@@ -193,18 +192,18 @@ export default function AppContextProvider({ children }) {
     const api = await axios.get(`${url}/user/${id}`, {
       headers: {
         "Content-Type": "application/json",
-        "token": token,
-        },
-        withCredentials: true,
-        });
+        // "token": token,
+      },
+      withCredentials: true,
+    });
+    // setUser(api.data.data)
+    console.log(api);
+    return api.data.data
+    
+  }
 
-        console.log(api);
-        return api
-        }
-        
-        const updateUserById = async ({ name, email, password, newPassword, id }) => {
-    console.log("id is", id)
-    const api = await axios.put(`${url}/updateBlog/${id}`, {
+  const updateUserById = async ({ name, email, password, newPassword, id }) => {
+    await axios.put(`${url}/profile/${id}`, {
       name, email, password, newPassword
     },
       {
@@ -215,8 +214,6 @@ export default function AppContextProvider({ children }) {
         },
         withCredentials: true,
       });
-      console.log(api);
-      return api;
 
   }
 
@@ -230,6 +227,8 @@ export default function AppContextProvider({ children }) {
     role,
     setRole,
     userId,
+    user,
+    setUser,
     fetchAllBlog,
     fetchBlogById,
     sendRequest,

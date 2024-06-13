@@ -12,8 +12,8 @@ export const adminNavData = [
         link: "/admin/users"
     },
     // {
-    //     label: "Blogs",
-    //     link: "/blogs"
+    //     label: "Profile",
+    //     link: "/admin/profile/:id"
     // },
     // {
     //     label: "Contact",

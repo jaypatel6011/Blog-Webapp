@@ -4,23 +4,29 @@ import PostItem from '../components/PostItem'
 import Title from './navPage/Title'
 import axios from 'axios'
 import { AppContext } from '../context/AppContext';
+import Loading from '../components/Loading';
 
   
 const Home = () => {
  const {blogs, fetchAllBlog} = useContext(AppContext)
+ const [loading, setLoading] = useState(false)
 
 
 
  useEffect(() => {
+  setLoading(true)
   fetchAllBlog()
+  setLoading(false)
  },[])
 
   return (
     <div className='w-full '>
 
-      <div className='w-full '>
-        
       <Title title={'Welcome to Our Blog'} subTitle={'Start your blog today and join a community of writers and readers who are passionate about sharing their stories and ideas. we offer everything you need to get started, from helpful tips and tutorials.'} />
+      {
+        loading ? (<Loading/>): (
+          <div className='w-full '>
+        
 
         {
           blogs.length > 0 ?
@@ -39,6 +45,8 @@ const Home = () => {
        
       }
       </div>
+        )
+      }
 
     </div>
   )
