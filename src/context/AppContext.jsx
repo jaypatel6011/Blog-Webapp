@@ -217,6 +217,24 @@ export default function AppContextProvider({ children }) {
 
   }
 
+  const deleteUserById = async (id) => {
+    console.log("id is", id);
+    await axios.delete(`${url}/deleteUser/${id}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "token": token,
+          "role": role
+
+        },
+        withCredentials: true,
+      });
+
+
+  }
+
+  
+
   const value = {
     blogs,
     setBlogs,
@@ -237,6 +255,7 @@ export default function AppContextProvider({ children }) {
     fetchAllUsers,
     fetchUserById,
     updateUserById,
+    deleteUserById,
     register,
     logOut,
     login,

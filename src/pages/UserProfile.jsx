@@ -41,7 +41,7 @@ const UserProfile = () => {
     await updateUserById({
       name: userData.name,
       email: userData.email,
-      password: userData.password,
+      password: userData.curPassword,
       newPassword: userData.newPassword,
       id
     })
@@ -78,22 +78,25 @@ const UserProfile = () => {
                   placeholder='Full Name'
                   name='name'
                   value={userData.name}
-                  onChange={formChangeHandler} />
+                  onChange={formChangeHandler} 
+                  />
 
                 <input
                   className=' w-[80%] md:w-[50%] mx-auto py-2 rounded-lg px-2'
                   type="email"
+                  readOnly
                   placeholder='Enter Email ID'
                   name='email'
                   value={userData.email}
-                  onChange={formChangeHandler} />
+                  onChange={formChangeHandler} 
+                  />
 
                 <input
                   className=' w-[80%] md:w-[50%]  mx-auto py-2 rounded-lg px-2'
                   type="password"
                   placeholder='Enter Current Password'
-                  name='password'
-                  value={userData.password}
+                  name='curPassword'
+                  value={userData.curPassword}
                   onChange={formChangeHandler} />
 
                 <input

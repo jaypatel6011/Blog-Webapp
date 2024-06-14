@@ -37,7 +37,7 @@ const AuthorPosts = () => {
 
                   <div className=' mt-6 mx-auto'>
 
-                    <Link to={`/blog/${dataName.id}`}>
+                    <Link to={`/blog/${dataName._id}`}>
                       <h3 className='text-[20px] font-bold mx-0 my-4 hover:text-blue-500'>{dataName.title}</h3>
                     </Link>
 
