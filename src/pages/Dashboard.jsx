@@ -6,17 +6,30 @@ import Title from './navPage/Title'
 import Loading from '../components/Loading'
 const Dashboard = () => {
   const [loading, setLoading] = useState(false)
-
+const [blogsData, setBlogsData]  = useState([])
   const { blogs, fetchAllBlog, sendDeleteRequest } = useContext(AppContext)
   const navigate = useNavigate()
+  
   useEffect(() => {
     setLoading(true)
-    fetchAllBlog()
+    async function fetched(){
+     const data = await fetchAllBlog()
+     console.log(data);
+     setBlogsData(data)
+
+    }
+    fetched()
     setLoading(false)
    },[])
   // let shortTitle = blogs.title.length > 30 ? blogs.title.substr(0,30)+'...' : blogs.title;
 
+async function deleteHandler(id){
 
+ await sendDeleteRequest(id)
+  const data = await fetchAllBlog()
+ console.log(data);
+ setBlogsData(data)
+}
 
   return (
     <div className='w-full '>
@@ -24,11 +37,9 @@ const Dashboard = () => {
       {
         loading ? (<Loading />): (
           <div>
-          {
-        blogs.length > 0 ? (
           <div className='w-full'>
             {
-              blogs.map((blog) => {
+              blogsData.map((blog) => {
                 return (
                   <div
                     className='w-[90%] mx-auto mt-6 bg-gray-300 px-3 p-2 rounded-lg'
@@ -56,7 +67,7 @@ const Dashboard = () => {
                             <i className="ri-pencil-line"></i>
                           </Link>
 
-                          <Link onClick={() => sendDeleteRequest(blog._id).then(() => navigate("/"))}
+                          <Link onClick={() => deleteHandler(blog._id)}
                             className=' bg-red font-semibold text-white px-2 sm:px-3 py-1 sm:py-2 rounded-full'
                           >
                             <i className="ri-delete-bin-6-line"></i>
@@ -70,8 +81,6 @@ const Dashboard = () => {
               })
             }
           </div>
-        ) : <div>No blogs</div>
-        }
       </div>
         )
       }

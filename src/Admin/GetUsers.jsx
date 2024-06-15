@@ -19,6 +19,14 @@ function GetUsers() {
         fetched()
     },[])
 
+    async function deleteHandler(id){
+
+        await deleteUserById(id)
+         const result = await fetchAllUsers()
+        console.log(result);
+        setUsers(result)
+       }
+
 
   return (
     <div>
@@ -52,7 +60,7 @@ function GetUsers() {
                                         <td>{item.email}</td>
                                         <td>{item.role}</td>
                                         <td>
-                                        <i onClick={() => deleteUserById(item._id)}  className="ri-delete-bin-6-line text-xl"></i>
+                                        <i onClick={() => deleteHandler(item._id)}  className="ri-delete-bin-6-line text-xl"></i>
                                         </td>
                                     </tr>
                                 ))

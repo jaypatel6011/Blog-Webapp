@@ -47,7 +47,7 @@ export default function AppContextProvider({ children }) {
 
 
   const fetchAllBlog = async () => {
-    setLoading(true)
+    // setLoading(true)
     const api = await axios.get(`${url}/`, {
       headers: {
         "Content-Type": "application/json",
@@ -57,9 +57,9 @@ export default function AppContextProvider({ children }) {
     // console.log(api.data.data);
     setBlogs(api.data.data);
     console.log(api.data.data)
-    setLoading(false)
-
-    // return api.data.data
+    
+    // setLoading(false)
+    return api.data.data
   }
 
 
