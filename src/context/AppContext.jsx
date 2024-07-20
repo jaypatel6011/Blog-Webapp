@@ -47,7 +47,7 @@ export default function AppContextProvider({ children }) {
 
 
   const fetchAllBlog = async () => {
-    // setLoading(true)
+    setLoading(true)
     const api = await axios.get(`${url}/`, {
       headers: {
         "Content-Type": "application/json",
@@ -57,14 +57,16 @@ export default function AppContextProvider({ children }) {
     // console.log(api.data.data);
     setBlogs(api.data.data);
     console.log(api.data.data)
-    
-    // setLoading(false)
+    setLoading(false)
     return api.data.data
+    
   }
 
 
 
   const fetchBlogById = async (id) => {
+    setLoading(true)
+
     const api = await axios.get(`${url}/getBlog/${id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -74,11 +76,13 @@ export default function AppContextProvider({ children }) {
 
     console.log(api.data.data);
     // setBlog(api.data.data);
+    setLoading(false)
     return api.data.data
   }
 
 
   const sendRequest = async (title, author, authorPic, image, category, content) => {
+    setLoading(true)
     const api = await axios.post(`${url}/createBlog`, {
       title, author, authorPic, image, category, content
     },
@@ -89,11 +93,13 @@ export default function AppContextProvider({ children }) {
         },
         withCredentials: true,
       });
+    setLoading(false)
     return api;
 
   }
 
   const sendUpdateRequest = async ({ title, author, authorPic, image, category, content, id }) => {
+    setLoading(true)
     await axios.put(`${url}/updateBlog/${id}`, {
       title, author, authorPic, image, category, content
     },
@@ -105,10 +111,13 @@ export default function AppContextProvider({ children }) {
         },
         withCredentials: true,
       });
+    setLoading(false)
+
 
   }
 
   const sendDeleteRequest = async (id) => {
+    setLoading(true)
     await axios.delete(`${url}/deleteBlog/${id}`,
       {
         headers: {
@@ -118,11 +127,14 @@ export default function AppContextProvider({ children }) {
         },
         withCredentials: true,
       });
+      setLoading(false)
 
 
   }
 
   const register = async (name, email, password, password2) => {
+    setLoading(true)
+
     const api = await axios.post(`${url}/register`, {
       name, email, password, password2
     },
@@ -135,10 +147,13 @@ export default function AppContextProvider({ children }) {
     )
 
     console.log(api)
+    setLoading(false)
+    
 
     return api;
   };
   const login = async (email, password) => {
+    setLoading(true)
     const api = await axios.post(`${url}/login`, {
       email, password
     },
@@ -160,6 +175,7 @@ export default function AppContextProvider({ children }) {
 
     }
     // setIsAuthenticated(true)
+    setLoading(false)
 
 
     return api;
@@ -167,6 +183,8 @@ export default function AppContextProvider({ children }) {
 
 
   const logOut = () => {
+    setLoading(true)
+
     localStorage.removeItem("token", token)
     localStorage.removeItem("role", role)
     localStorage.removeItem("id", userId)
@@ -174,21 +192,27 @@ export default function AppContextProvider({ children }) {
     setIsAuthenticated(false)
     setRole("")
     setUserId("")
+    setLoading(false)
 
   }
 
   const fetchAllUsers = async () => {
+    setLoading(true)
+
     const api = await axios.get(`${url}/users`, {
       headers: {
         "Content-Type": "application/json",
       },
       withCredentials: true,
     });
+    setLoading(false)
+
     return api
   }
   // token:localStorage.getItem("token")? JSON.parse(localStorage.getItem("token")): null
 
   const fetchUserById = async (id) => {
+    setLoading(true)
     const api = await axios.get(`${url}/user/${id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -198,11 +222,15 @@ export default function AppContextProvider({ children }) {
     });
     // setUser(api.data.data)
     console.log(api);
+    setLoading(false)
     return api.data.data
+
     
   }
 
   const updateUserById = async ({ name, email, password, newPassword, id }) => {
+    setLoading(true)
+
     await axios.put(`${url}/profile/${id}`, {
       name, email, password, newPassword
     },
@@ -214,10 +242,14 @@ export default function AppContextProvider({ children }) {
         },
         withCredentials: true,
       });
+    setLoading(false)
+
 
   }
 
   const deleteUserById = async (id) => {
+    setLoading(true)
+
     console.log("id is", id);
     await axios.delete(`${url}/deleteUser/${id}`,
       {
@@ -230,6 +262,7 @@ export default function AppContextProvider({ children }) {
         withCredentials: true,
       });
 
+      setLoading(false)
 
   }
 
@@ -240,6 +273,8 @@ export default function AppContextProvider({ children }) {
     setBlogs,
     token,
     setToken,
+    loading,
+    setLoading,
     isAuthenticated,
     setIsAuthenticated,
     role,
