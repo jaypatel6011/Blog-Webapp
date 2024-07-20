@@ -58,10 +58,10 @@ const UserProfile = () => {
 
         ) : (
           <div className='w-full flex flex-col items-center justify-between gap-y-10'>
-            <Link
+            {/* <Link
               className=' bg-primary font-bold text-white  px-3 py-1 rounded-lg hover:text-black hover:bg-white transition-all duration-300'
 
-              to={'/admin/myposts'} >My Posts</Link>
+              to={'/admin/myposts'} >My Posts</Link> */}
 
             <div className='w-full flex flex-col items-center justify-between'>
               <div className='w-full flex flex-col items-center justify-between space-y-5'>

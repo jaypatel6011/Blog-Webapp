@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppContext } from '../context/AppContext'
 import Title from '../pages/navPage/Title'
 import { useNavigate } from 'react-router-dom'
+import Loading from '../components/Loading'
 
 function GetUsers() {
     const[users, setUsers] = useState([])
     const navigate = useNavigate()
 
-    const {fetchAllUsers , deleteUserById} = useContext(AppContext)
+    const {fetchAllUsers , deleteUserById, loading} = useContext(AppContext)
 
     useEffect(() => {
         const fetched = async() =>{
@@ -32,7 +33,9 @@ function GetUsers() {
     <div>
        <Title title={'Users'}/>
         
-        <table className="w-full">
+        {
+            loading ? (<Loading/>) : (
+                <table className="w-full">
                         <thead>
                             <tr className=" bg-orange-500 text-white text-left">
                                 <th className="sm:px-4 py-3">User`s Name</th>
@@ -66,7 +69,9 @@ function GetUsers() {
                                 ))
                             }
                         </tbody>
-                    </table>    
+                    </table> 
+            )
+        }   
         
     </div>
   )
