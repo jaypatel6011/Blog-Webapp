@@ -2,6 +2,7 @@
 // import author from './Image/author1.jpg'
 //  export const REACT_APP_URL = "https://blog-mern-app-a55c.onrender.com/api/v1"
  export const REACT_APP_URL = "https://blog-mern-app-1-bu8e.onrender.com/api/v1"
+ 
 //  export const REACT_APP_URL = "http://localhost:4000/api/v1"
 
 
